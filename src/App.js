@@ -34,7 +34,7 @@ function App() {
     const context = generateContext(code);
     const response = await callGPT3(context);
 
-    return response.data?.choices[0]?.text ?? "No response";
+    return response;
   };
 
   const runCode = async (code) => {
