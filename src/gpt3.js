@@ -1,8 +1,9 @@
 const { Configuration, OpenAIApi } = require("openai");
+const secretKey = process.env.REACT_APP_OPEN_AI_KEY;
 
 export async function callGPT3(myPrompt) {
   const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: secretKey,
   });
   const openai = new OpenAIApi(configuration);
 

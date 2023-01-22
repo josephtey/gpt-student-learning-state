@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import { callGPT3 } from "./gpt3";
 import AceEditor from "react-ace";
@@ -6,6 +6,7 @@ import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-monokai";
 
+const problem = `Given string s. Return the string with '@@' added at its beginning and end. Unless the string is length 3 or less, then add a more modest '@' at both ends.`;
 function App() {
   const [currentCode, setCurrentCode] = useState(null);
   const [gptResponses, setGptResponses] = useState([]);
@@ -17,12 +18,12 @@ function App() {
       Your task is to provide them a hint that doesn't give them the exact solution but helps them identify the issue they're having and help them get unstuck. 
       
       Here is my coding problem: 
-      We are looking for the name of an internet host within a string. Find the '.com' in s. Find the series of alphabetic chars or periods before the '.com' with a while loop and return the whole hostname, so 'xx www.foo.com xx' returns 'www.foo.com'. Return the empty string if there is no '.com'. This version has the added complexity of the periods.
+      ${problem}
 
       Here is my code: 
       ${code}
 
-      It isn't working. Can you give me a hint? 
+      This isn't working. Can you give me a hint? 
       `;
   };
   const generateHint = async (code) => {
@@ -59,14 +60,7 @@ function App() {
         style={{ height: "75%" }}
       >
         <b>Coding Problem:</b>
-        <p>
-          We are looking for the name of an internet host within a string. Find
-          the '.com' in s. Find the series of alphabetic chars or periods before
-          the '.com' with a while loop and return the whole hostname, so 'xx
-          www.foo.com xx' returns 'www.foo.com'. Return the empty string if
-          there is no '.com'. This version has the added complexity of the
-          periods.
-        </p>
+        <p>{problem}</p>
       </div>
       <div className="flex flex-col bg-stone-100 gap-3">
         <AceEditor
