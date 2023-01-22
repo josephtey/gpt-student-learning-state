@@ -10,6 +10,7 @@ const problem = `Given string s. Return the string with '@@' added at its beginn
 function App() {
   const [currentCode, setCurrentCode] = useState(null);
   const [gptResponses, setGptResponses] = useState([]);
+  const [output, setOutput] = useState(null);
 
   const generateContext = (code) => {
     return `
@@ -34,13 +35,8 @@ function App() {
   };
 
   const runCode = async (code) => {
-    let pyodide = await window.loadPyodide();
-    pyodide.runPython(`
-        import sys
-        sys.version
-    `);
-    const output = pyodide.runPython(code);
-    console.log("OUTPUT: ", output);
+    const pyodide = await window.loadPyodide();
+    return await pyodide.runPythonAsync(code);
   };
   const getHelp = async () => {
     const hint = await generateHint(currentCode);
@@ -75,7 +71,8 @@ function App() {
         <div className="flex flex-row gap-3">
           <button
             onClick={async () => {
-              runCode(currentCode);
+              const out = await runCode(currentCode);
+              setOutput(out);
             }}
             className="rounded-md w-full bg-red-500 text-white p-2 font-bold text-center self-end hover:bg-red-600"
           >
@@ -92,12 +89,12 @@ function App() {
         </div>
 
         <div
-          className="rounded-lg bg-black"
+          className="rounded-lg bg-black text-white p-4"
           style={{
             height: "17.5%",
           }}
         >
-          Hello
+          {output}
         </div>
       </div>
       <div
