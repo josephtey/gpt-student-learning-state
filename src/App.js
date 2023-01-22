@@ -6,7 +6,6 @@ import { addHint, updateEvaluation } from "./utils";
 
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-monokai";
-alert("success!");
 
 const problem = `Given string s. Return the string with '@@' added at its beginning and end. Unless the string is length 3 or less, then add a more modest '@' at both ends.`;
 const evals = ["No", "Not really", "Kinda", "Yes"];
@@ -76,11 +75,11 @@ function App() {
           editorProps={{ $blockScrolling: true }}
           style={{
             "border-radius": "8px",
-            height: "50%",
+            height: "69%",
           }}
         />
         <div className="flex flex-row gap-3">
-          <button
+          {/* <button
             onClick={async () => {
               const out = await runCode(currentCode);
               setOutput(out);
@@ -88,7 +87,7 @@ function App() {
             className="rounded-md w-full bg-red-500 text-white p-2 font-bold text-center self-end hover:bg-red-600"
           >
             Run Code
-          </button>
+          </button> */}
           <button
             onClick={() => {
               getHelp();
@@ -99,14 +98,14 @@ function App() {
           </button>
         </div>
 
-        <div
+        {/* <div
           className="rounded-lg bg-black text-white p-4"
           style={{
             height: "17.5%",
           }}
         >
           {output}
-        </div>
+        </div> */}
       </div>
       <div
         className="w-80 bg-white rounded-lg p-4 flex flex-col gap-4"
