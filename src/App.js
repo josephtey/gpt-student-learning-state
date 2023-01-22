@@ -1,3 +1,4 @@
+import "semantic-ui-css/semantic.min.css";
 import { useState } from "react";
 import "./App.css";
 import { callGPT3 } from "./gpt3";
@@ -5,17 +6,33 @@ import AceEditor from "react-ace";
 import { addHint, updateEvaluation } from "./utils";
 import Swal from "sweetalert2";
 import ReactLoading from "react-loading";
+import { Dropdown } from "semantic-ui-react";
 
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-monokai";
 
-const problem = `Given string s. Return the string with '@@' added at its beginning and end. Unless the string is length 3 or less, then add a more modest '@' at both ends.`;
+const problems = [
+  {
+    text: "fancy_at",
+    value: `Given string s. Return the string with '@@' added at its beginning and end. Unless the string is length 3 or less, then add a more modest '@' at both ends.`,
+  },
+  {
+    text: "odo",
+    value: `Given string s. If the first and third chars in the string are the same, then return a version of the string with that char added at the beginning and end of the string. Otherwise, of if the string is too short, return the string unchanged.`,
+  },
+  {
+    text: "cab_code",
+    value: `Given string s. If the string is length 3, return a version of the string with the three chars changed according to the "cab" code. This just switches the order of the three chars, so 'abc' becomes 'cab'. If the string is not length 3, return it unchanged.`,
+  },
+];
+
 const evals = ["No", "Not really", "Kinda", "Yes"];
 
 function App() {
   const [currentCode, setCurrentCode] = useState(null);
   const [gptResponses, setGptResponses] = useState([]);
   const [isGettingHelp, setIsGettingHelp] = useState(false);
+  const [selectedProblem, setSelectedProblem] = useState(problems[0].value);
   const [output, setOutput] = useState(null);
 
   const generateContext = (code) => {
@@ -25,7 +42,7 @@ function App() {
       Your task is to provide them a hint that doesn't give them the exact solution but helps them identify the issue they're having and help them get unstuck. 
       
       Here is my coding problem: 
-      ${problem}
+      ${selectedProblem}
 
       Here is my code: 
       ${code}
@@ -49,7 +66,7 @@ function App() {
   };
   const getHelp = async () => {
     const hint = await generateHint(currentCode);
-    const id = await addHint(currentCode, hint, problem);
+    const id = await addHint(currentCode, hint, selectedProblem);
 
     setGptResponses([
       {
@@ -69,8 +86,21 @@ function App() {
         className="w-80 bg-white ml-5 rounded-lg p-4"
         style={{ height: "75%" }}
       >
-        <b>Coding Problem:</b>
-        <p>{problem}</p>
+        <Dropdown
+          placeholder="Select Problem"
+          fluid
+          search
+          selection
+          value={selectedProblem}
+          onChange={(e, data) => {
+            setSelectedProblem(data.value);
+          }}
+          options={problems}
+        />
+        <div className="mt-5">
+          <b>Coding Problem:</b>
+          <p>{selectedProblem}</p>
+        </div>
       </div>
       <div className="flex flex-col bg-stone-100 gap-3">
         <AceEditor
@@ -98,7 +128,7 @@ function App() {
             onClick={() => {
               getHelp();
             }}
-            className="flex rounded-md w-full bg-blue-500 text-white p-2 font-bold text-center justify-center content-center self-end hover:bg-blue-600"
+            className="text-lg flex rounded-md w-full bg-blue-500 text-white p-2 font-bold text-center justify-center content-center self-end hover:bg-blue-600"
             disabled={isGettingHelp}
           >
             {isGettingHelp ? (
@@ -129,8 +159,8 @@ function App() {
       >
         {gptResponses.length > 0 ? (
           <div style={{ height: "50px" }}>
-            <h2 className="font-bold mb-2">Was this hint helpful?</h2>
-            <div className="flex flex-row justify-between text-stone-600">
+            <b className="text-lg">Was this hint helpful?</b>
+            <div className="flex flex-row justify-between text-stone-600 mt-2">
               {evals.map((val, i) => {
                 return (
                   <button
@@ -155,7 +185,7 @@ function App() {
           {gptResponses.map((hint, i) => {
             return (
               <div
-                className="bg-blue-500 rounded-lg p-2 text-white text-xs"
+                className="bg-blue-500 rounded-lg p-2 text-white text-sm"
                 style={{
                   opacity: i === 0 ? "1" : "0.3",
                 }}
