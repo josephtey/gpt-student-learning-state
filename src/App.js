@@ -35,19 +35,17 @@ function App() {
 
   const runCode = async (code) => {
     let pyodide = await window.loadPyodide();
-    console.log(
-      pyodide.runPython(`
-          import sys
-          sys.version
-      `)
-    );
+    pyodide.runPython(`
+        import sys
+        sys.version
+    `);
     const output = pyodide.runPython(code);
     console.log("OUTPUT: ", output);
   };
   const getHelp = async () => {
     const hint = await generateHint(currentCode);
 
-    setGptResponses([...gptResponses, hint]);
+    setGptResponses([hint, ...gptResponses]);
   };
   const onChange = (newValue) => {
     setCurrentCode(newValue);
@@ -106,10 +104,15 @@ function App() {
         className="w-80 bg-white rounded-lg p-4 flex flex-col gap-4"
         style={{ height: "75%" }}
       >
-        <div className="bg-stone-100 rounded-lg w-full h-screen p-4 gap-2 flex flex-col">
-          {gptResponses.map((hint) => {
+        <div className="bg-stone-100 rounded-lg w-full h-screen p-4 gap-2 flex flex-col overflow-auto">
+          {gptResponses.map((hint, i) => {
             return (
-              <div className="bg-blue-500 rounded-lg p-2 text-white text-xs">
+              <div
+                className="bg-blue-500 rounded-lg p-2 text-white text-xs"
+                style={{
+                  opacity: i === 0 ? "1" : "0.3",
+                }}
+              >
                 {hint}
               </div>
             );
