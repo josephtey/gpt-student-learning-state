@@ -3,6 +3,8 @@ import "./App.css";
 import { callGPT3 } from "./gpt3";
 import AceEditor from "react-ace";
 import { addHint, updateEvaluation } from "./utils";
+import Swal from "sweetalert2";
+import ReactLoading from "react-loading";
 
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-monokai";
@@ -13,6 +15,7 @@ const evals = ["No", "Not really", "Kinda", "Yes"];
 function App() {
   const [currentCode, setCurrentCode] = useState(null);
   const [gptResponses, setGptResponses] = useState([]);
+  const [isGettingHelp, setIsGettingHelp] = useState(false);
   const [output, setOutput] = useState(null);
 
   const generateContext = (code) => {
@@ -31,8 +34,11 @@ function App() {
       `;
   };
   const generateHint = async (code) => {
+    setIsGettingHelp(true);
     const context = generateContext(code);
     const response = await callGPT3(context);
+
+    setIsGettingHelp(false);
 
     return response;
   };
@@ -92,9 +98,19 @@ function App() {
             onClick={() => {
               getHelp();
             }}
-            className="rounded-md w-full bg-blue-500 text-white p-2 font-bold text-center self-end hover:bg-blue-600"
+            className="flex rounded-md w-full bg-blue-500 text-white p-2 font-bold text-center justify-center content-center self-end hover:bg-blue-600"
+            disabled={isGettingHelp}
           >
-            Get Help!
+            {isGettingHelp ? (
+              <ReactLoading
+                type={"spin"}
+                color={"white"}
+                height={"5%"}
+                width={"5%"}
+              />
+            ) : (
+              <>Get Help!</>
+            )}
           </button>
         </div>
 
@@ -120,6 +136,12 @@ function App() {
                   <button
                     onClick={async () => {
                       await updateEvaluation(gptResponses[0].id, i + 1);
+
+                      Swal.fire(
+                        "Thank you!",
+                        "Your feedback helps a lot.",
+                        "success"
+                      );
                     }}
                   >
                     {val}
