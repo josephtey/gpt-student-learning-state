@@ -2,7 +2,7 @@ const { Configuration, OpenAIApi } = require("openai");
 
 export async function callGPT3(myPrompt) {
   const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: "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",
   });
   const openai = new OpenAIApi(configuration);
 
