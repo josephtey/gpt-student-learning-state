@@ -2,11 +2,15 @@ import { useState } from "react";
 import "./App.css";
 import { callGPT3 } from "./gpt3";
 import AceEditor from "react-ace";
+import { addHint, updateEvaluation } from "./utils";
 
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-monokai";
+alert("success!");
 
 const problem = `Given string s. Return the string with '@@' added at its beginning and end. Unless the string is length 3 or less, then add a more modest '@' at both ends.`;
+const evals = ["No", "Not really", "Kinda", "Yes"];
+
 function App() {
   const [currentCode, setCurrentCode] = useState(null);
   const [gptResponses, setGptResponses] = useState([]);
@@ -40,8 +44,15 @@ function App() {
   };
   const getHelp = async () => {
     const hint = await generateHint(currentCode);
+    const id = await addHint(currentCode, hint, problem);
 
-    setGptResponses([hint, ...gptResponses]);
+    setGptResponses([
+      {
+        id,
+        hint,
+      },
+      ...gptResponses,
+    ]);
   };
   const onChange = (newValue) => {
     setCurrentCode(newValue);
@@ -101,6 +112,24 @@ function App() {
         className="w-80 bg-white rounded-lg p-4 flex flex-col gap-4"
         style={{ height: "75%" }}
       >
+        {gptResponses.length > 0 ? (
+          <div style={{ height: "50px" }}>
+            <h2 className="font-bold mb-2">Was this hint helpful?</h2>
+            <div className="flex flex-row justify-between text-stone-600">
+              {evals.map((val, i) => {
+                return (
+                  <button
+                    onClick={async () => {
+                      await updateEvaluation(gptResponses[0].id, i + 1);
+                    }}
+                  >
+                    {val}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ) : null}
         <div className="bg-stone-100 rounded-lg w-full h-screen p-4 gap-2 flex flex-col overflow-auto">
           {gptResponses.map((hint, i) => {
             return (
@@ -110,7 +139,7 @@ function App() {
                   opacity: i === 0 ? "1" : "0.3",
                 }}
               >
-                {hint}
+                {hint.hint}
               </div>
             );
           })}
