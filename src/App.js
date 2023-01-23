@@ -23,7 +23,82 @@ const problems = [
   {
     text: "cab_code",
     value: `Given string s. If the string is length 3, return a version of the string with the three chars changed according to the "cab" code. This just switches the order of the three chars, so 'abc' becomes 'cab'. If the string is not length 3, return it unchanged.`,
+
   },
+  {
+    text: "Red Channel",
+    value: `Load the image for the given filename. Change the image as follows: For every pixel, set the green and blue values to 0. This switches off all the green and blue lights, leaving only the red lights, aka the red channel. Return the changed image.`
+  },
+  {
+    text: "Darker",
+    value: `Load the image for the given filename. Make the image darker by halving the red, green, and blue values. Return the changed image.`
+  },
+  {
+    text: "Copper Puzzle",
+    value: `The copper puzzle: a picture of something famous is hidden in the input image. The red values are all meaningless noise, and should be set to 0. The green and blue values are 10x smaller than the correct values. Write code to fix the image. Return the fixed image.`
+  },
+  {
+    text: "Banana 5-10-20 Puzzle",
+    value: `Fix the 5-10-20 puzzle image of a banana sitting on red bricks. The red, green, and blue values are 5, 10, and 20 times too small. Figure out which color goes with which factor.`
+  },
+  {
+    text: "Iron Puzzle",
+    value: `A picture of a famous iron object is hidden in the input image. In the input image, the red and green values are meaningless noise, appearing as little dots. The blue value of each input pixel is 1/5 of its correct value. The correct red and green values are simply the same as the blue value. So if a pixel's correct blue is 220, then its red and green should also be 220. Write code to fix the problems in the input image and return it, revealing the iron object. The resulting image will be grayscale, since when a pixel's red, green, and blue values are all equal, that pixel is a shade of gray.`
+  },
+  {
+    text: "Watermelon 5-10-20 Puzzle",
+    value: `The input is a 5-10-20 puzzle image of a watermelon sitting on a tan cutting board. Write code to fix the image and return it. Figure out which factor goes with which color by experimentation.`
+  },
+  {
+    text: "Darker Nested",
+    value: `Use nested range loops to modify the original image. Make all the pixels darker by multiplying the red/green/blue values by 0.5. Return the modified image.`
+  },
+  {
+    text: "Darker Out",
+    value: `Create a new "out" image the same size as the original image. Set darker versions of every pixel into the out image, multiplying the red/green/blue values by 0.5. Return the out image. This demonstates having a separate out image and nested loops.`
+  },
+  {
+    text: "Green Channel Nested",
+    value: `Create a new out image the same size as the original image. Write nested loop code to set the green channel of the original image into the out image. Do this by copying the green values, and setting red and blue values to 0 for each pixel in the out image. Return the out image.`
+  },
+  {
+    text: "Darker Left",
+    value: `The "left" parameter is an int value, ranging from zero to the width of the original image. Modify the original image by darkening a stripe "left" pixels width down its left side. Darken each pixel by multiplying the red/green/blue values by 0.5. Return the modified image. (This problem uses an int parameter, but not a separate out image.)`
+  },
+  {
+    text: "Copy Left",
+    value: `Create a new out image the same size as the original image. The "left" parameter is an int value, ranging from zero to the original image width. Copy a stripe "left" pixels wide from the left side of the original image to the out image. So if left is 10, copy a 10 pixel wide stripe. Return the out image.`
+  },
+  {
+    text: "image shift",
+    value: "Create an out image 10 pixels wider than the original. (1) Set an aqua colored vertical stripe 10 pixels wide at the left by setting red to 0, leaving green and blue at 255. (2) Copy the original image just to the right of the aqua stripe. Return the computed out image."
+  },
+  {
+    text: "Aqua 10",
+    value: `Create an out image 10 pixels wider than the original. (1) Set an aqua colored vertical stripe 10 pixels wide at the left by setting red to 0, leaving green and blue at 255. (2) Copy the original image just to the right of the aqua stripe. Return the computed out image.`
+  },
+  {
+    text: "Aqua 10",
+    value: `The "n" parameter is an int value, zero or more. The code in the function should use whatever value is in n. (Values of n appear in the Cases menu.) Create an out image n pixels wider than the original. (1) Set an aqua colored vertical stripe n pixels wide at the left by setting red to 0, leaving green and blue at 255. (2) Copy the original image just to the right of the aqua stripe. Return the computed out image.`
+  },
+  {
+    text: "Side N",
+    value: `The "n" parameter is an int value, zero or more. The code in the function should use whatever value is in n. (Values of n appear in the Cases menu.)
+
+    Create an out image with a copy of the original image with n-pixel-wide blank areas added on its left and right sides. Return the out image.`
+  },
+  {
+    text: "Mirror1",
+    value: `Read the original image at the given filename. Create a new "out" image twice as wide as the original. Copy the original image to the left half of out, leaving the right half blank. Return the out image (this is a halfway-point to the mirror2 problem).`
+  },
+  {
+    text: "Mirror2",
+    value: `Like mirror1, but also copy the original image to the right half of "out" as a horizontally flipped mirror image. Return the out image. Starter code does the left half, right half TBD.`
+  },
+  {
+    text: "Mirror3",
+    value: `Create and return an out image twice as wide as the original image. Copy to the out image two, side by side copies of the original image with the left copy vertically flipped upside down.`
+  }
 ];
 
 const evals = ["No", "Not really", "Kinda", "Yes"];
