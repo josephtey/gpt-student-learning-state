@@ -28,20 +28,9 @@ const problems = [
     starter_code: `def cab_code(s):
     pass`,
     value: `Given string s. If the string is length 3, return a version of the string with the three chars changed according to the "cab" code. This just switches the order of the three chars, so 'abc' becomes 'cab'. If the string is not length 3, return it unchanged.`,
-
   },
   {
     text: "Red Channel",
-    starter_code: `def darker(filename):
-    image = SimpleImage(filename)
-    for pixel in image:
-        pixel.green = 0
-        pixel.blue = 0
-    return image`,
-    value: `Load the image for the given filename. Change the image as follows: For every pixel, set the green and blue values to 0. This switches off all the green and blue lights, leaving only the red lights, aka the red channel. Return the changed image.`
-  },
-  {
-    text: "Darker",
     starter_code: `def red_channel(filename):
     image = SimpleImage(filename)
     for pixel in image:
@@ -51,8 +40,17 @@ const problems = [
         # or shorthand form:
         # pixel.red *= 0.5
     return image`,
-    
-    value: `Load the image for the given filename. Make the image darker by halving the red, green, and blue values. Return the changed image.`
+    value: `Load the image for the given filename. Change the image as follows: For every pixel, set the green and blue values to 0. This switches off all the green and blue lights, leaving only the red lights, aka the red channel. Return the changed image.`,
+  },
+  {
+    text: "Darker",
+    starter_code: `def darker(filename):
+    image = SimpleImage(filename)
+    for pixel in image:
+        pixel.green = 0
+        pixel.blue = 0
+    return image`,
+    value: `Load the image for the given filename. Make the image darker by halving the red, green, and blue values. Return the changed image.`,
   },
   {
     text: "Copper Puzzle",
@@ -61,7 +59,7 @@ const problems = [
     for pixel in image:
         pass # your code here
     return image`,
-    value: `The copper puzzle: a picture of something famous is hidden in the input image. The red values are all meaningless noise, and should be set to 0. The green and blue values are 10x smaller than the correct values. Write code to fix the image. Return the fixed image.`
+    value: `The copper puzzle: a picture of something famous is hidden in the input image. The red values are all meaningless noise, and should be set to 0. The green and blue values are 10x smaller than the correct values. Write code to fix the image. Return the fixed image.`,
   },
   {
     text: "Banana 5-10-20 Puzzle",
@@ -70,7 +68,7 @@ const problems = [
     for pixel in image:
         pass # your code here
     return image`,
-    value: `Fix the 5-10-20 puzzle image of a banana sitting on red bricks. The red, green, and blue values are 5, 10, and 20 times too small. Figure out which color goes with which factor.`
+    value: `Fix the 5-10-20 puzzle image of a banana sitting on red bricks. The red, green, and blue values are 5, 10, and 20 times too small. Figure out which color goes with which factor.`,
   },
   {
     text: "Iron Puzzle",
@@ -78,7 +76,7 @@ const problems = [
     image = SimpleImage(filename)
     pass # your code here
     return image`,
-    value: `A picture of a famous iron object is hidden in the input image. In the input image, the red and green values are meaningless noise, appearing as little dots. The blue value of each input pixel is 1/5 of its correct value. The correct red and green values are simply the same as the blue value. So if a pixel's correct blue is 220, then its red and green should also be 220. Write code to fix the problems in the input image and return it, revealing the iron object. The resulting image will be grayscale, since when a pixel's red, green, and blue values are all equal, that pixel is a shade of gray.`
+    value: `A picture of a famous iron object is hidden in the input image. In the input image, the red and green values are meaningless noise, appearing as little dots. The blue value of each input pixel is 1/5 of its correct value. The correct red and green values are simply the same as the blue value. So if a pixel's correct blue is 220, then its red and green should also be 220. Write code to fix the problems in the input image and return it, revealing the iron object. The resulting image will be grayscale, since when a pixel's red, green, and blue values are all equal, that pixel is a shade of gray.`,
   },
   {
     text: "Watermelon 5-10-20 Puzzle",
@@ -88,7 +86,7 @@ const problems = [
     pass # your code here
 
     return image`,
-    value: `The input is a 5-10-20 puzzle image of a watermelon sitting on a tan cutting board. Write code to fix the image and return it. Figure out which factor goes with which color by experimentation.`
+    value: `The input is a 5-10-20 puzzle image of a watermelon sitting on a tan cutting board. Write code to fix the image and return it. Figure out which factor goes with which color by experimentation.`,
   },
   {
     text: "Darker Nested",
@@ -101,7 +99,7 @@ const problems = [
             pixel.green *= 0.5
             pixel.blue *= 0.5
     return image`,
-    value: `Use nested range loops to modify the original image. Make all the pixels darker by multiplying the red/green/blue values by 0.5. Return the modified image.`
+    value: `Use nested range loops to modify the original image. Make all the pixels darker by multiplying the red/green/blue values by 0.5. Return the modified image.`,
   },
   {
     text: "Darker Out",
@@ -118,48 +116,49 @@ const problems = [
             pixel_out.green = pixel.green * 0.5
             pixel_out.blue = pixel.blue * 0.5
     return out`,
-    value: `Create a new "out" image the same size as the original image. Set darker versions of every pixel into the out image, multiplying the red/green/blue values by 0.5. Return the out image. This demonstates having a separate out image and nested loops.`
+    value: `Create a new "out" image the same size as the original image. Set darker versions of every pixel into the out image, multiplying the red/green/blue values by 0.5. Return the out image. This demonstates having a separate out image and nested loops.`,
   },
   {
     text: "Green Channel Nested",
-    starter_code:`def green_channel(filename):
+    starter_code: `def green_channel(filename):
     image = SimpleImage(filename)
     pass`,
-    value: `Create a new out image the same size as the original image. Write nested loop code to set the green channel of the original image into the out image. Do this by copying the green values, and setting red and blue values to 0 for each pixel in the out image. Return the out image.`
+    value: `Create a new out image the same size as the original image. Write nested loop code to set the green channel of the original image into the out image. Do this by copying the green values, and setting red and blue values to 0 for each pixel in the out image. Return the out image.`,
   },
   {
     text: "Darker Left",
-    starter_code:`def darker_left(filename):
+    starter_code: `def darker_left(filename):
     image = SimpleImage(filename)
     pass
     return image`,
-    value: `The "left" parameter is an int value, ranging from zero to the width of the original image. Modify the original image by darkening a stripe "left" pixels width down its left side. Darken each pixel by multiplying the red/green/blue values by 0.5. Return the modified image. (This problem uses an int parameter, but not a separate out image.)`
+    value: `The "left" parameter is an int value, ranging from zero to the width of the original image. Modify the original image by darkening a stripe "left" pixels width down its left side. Darken each pixel by multiplying the red/green/blue values by 0.5. Return the modified image. (This problem uses an int parameter, but not a separate out image.)`,
   },
   {
     text: "Copy Left",
-    starter_code:`def copy_left(filename):
+    starter_code: `def copy_left(filename):
     image = SimpleImage(filename)
     pass`,
-    value: `Create a new out image the same size as the original image. The "left" parameter is an int value, ranging from zero to the original image width. Copy a stripe "left" pixels wide from the left side of the original image to the out image. So if left is 10, copy a 10 pixel wide stripe. Return the out image.`
+    value: `Create a new out image the same size as the original image. The "left" parameter is an int value, ranging from zero to the original image width. Copy a stripe "left" pixels wide from the left side of the original image to the out image. So if left is 10, copy a 10 pixel wide stripe. Return the out image.`,
   },
   {
     text: "image shift",
-    starter_code:``,
-    value: "Create an out image 10 pixels wider than the original. (1) Set an aqua colored vertical stripe 10 pixels wide at the left by setting red to 0, leaving green and blue at 255. (2) Copy the original image just to the right of the aqua stripe. Return the computed out image."
+    starter_code: ``,
+    value:
+      "Create an out image 10 pixels wider than the original. (1) Set an aqua colored vertical stripe 10 pixels wide at the left by setting red to 0, leaving green and blue at 255. (2) Copy the original image just to the right of the aqua stripe. Return the computed out image.",
   },
   {
     text: "Aqua 10",
     starter_code: `def aqua_stripe(filename):
     image = SimpleImage(filename)
     pass`,
-    value: `Create an out image 10 pixels wider than the original. (1) Set an aqua colored vertical stripe 10 pixels wide at the left by setting red to 0, leaving green and blue at 255. (2) Copy the original image just to the right of the aqua stripe. Return the computed out image.`
+    value: `Create an out image 10 pixels wider than the original. (1) Set an aqua colored vertical stripe 10 pixels wide at the left by setting red to 0, leaving green and blue at 255. (2) Copy the original image just to the right of the aqua stripe. Return the computed out image.`,
   },
   {
     text: "Aqua N",
     starter_code: `def aqua_stripe(filename):
     image = SimpleImage(filename)
     pass`,
-    value: `The "n" parameter is an int value, zero or more. The code in the function should use whatever value is in n. (Values of n appear in the Cases menu.) Create an out image n pixels wider than the original. (1) Set an aqua colored vertical stripe n pixels wide at the left by setting red to 0, leaving green and blue at 255. (2) Copy the original image just to the right of the aqua stripe. Return the computed out image.`
+    value: `The "n" parameter is an int value, zero or more. The code in the function should use whatever value is in n. (Values of n appear in the Cases menu.) Create an out image n pixels wider than the original. (1) Set an aqua colored vertical stripe n pixels wide at the left by setting red to 0, leaving green and blue at 255. (2) Copy the original image just to the right of the aqua stripe. Return the computed out image.`,
   },
   {
     text: "Side N",
@@ -168,11 +167,11 @@ const problems = [
     pass`,
     value: `The "n" parameter is an int value, zero or more. The code in the function should use whatever value is in n. (Values of n appear in the Cases menu.)
 
-    Create an out image with a copy of the original image with n-pixel-wide blank areas added on its left and right sides. Return the out image.`
+    Create an out image with a copy of the original image with n-pixel-wide blank areas added on its left and right sides. Return the out image.`,
   },
   {
     text: "Mirror1",
-    starter_code:`def mirror1(filename):
+    starter_code: `def mirror1(filename):
     image = SimpleImage(filename)
     # Create an out image twice as wide as the original.
     out = SimpleImage.blank(image.width * 2, image.height)
@@ -187,7 +186,7 @@ const problems = [
             # right copy
             # nothing!
     return out`,
-    value: `Read the original image at the given filename. Create a new "out" image twice as wide as the original. Copy the original image to the left half of out, leaving the right half blank. Return the out image (this is a halfway-point to the mirror2 problem).`
+    value: `Read the original image at the given filename. Create a new "out" image twice as wide as the original. Copy the original image to the left half of out, leaving the right half blank. Return the out image (this is a halfway-point to the mirror2 problem).`,
   },
   {
     text: "Mirror2",
@@ -208,7 +207,7 @@ const problems = [
                 # want: pixel_right at ??? to write to
                 pass
         return out`,
-    value: `Like mirror1, but also copy the original image to the right half of "out" as a horizontally flipped mirror image. Return the out image. Starter code does the left half, right half TBD.`
+    value: `Like mirror1, but also copy the original image to the right half of "out" as a horizontally flipped mirror image. Return the out image. Starter code does the left half, right half TBD.`,
   },
   {
     text: "Mirror3",
@@ -218,20 +217,22 @@ const problems = [
     pass
     
     return out`,
-    value: `Create and return an out image twice as wide as the original image. Copy to the out image two, side by side copies of the original image with the left copy vertically flipped upside down.`
-  }
+    value: `Create and return an out image twice as wide as the original image. Copy to the out image two, side by side copies of the original image with the left copy vertically flipped upside down.`,
+  },
 ];
-
 
 const evals = ["No", "Not really", "Kinda", "Yes"];
 const test = `def fancy_at(s):
-                  pass`
+                  pass`;
 function App() {
   const [currentCode, setCurrentCode] = useState(null);
   const [gptResponses, setGptResponses] = useState([]);
   const [isGettingHelp, setIsGettingHelp] = useState(false);
+  const [isRunningCode, setIsRunningCode] = useState(false);
   const [selectedProblem, setSelectedProblem] = useState(problems[0].value);
-  const [currentStarter, setCurrentStarter] = useState(problems[0].starter_code)
+  const [currentStarter, setCurrentStarter] = useState(
+    problems[0].starter_code
+  );
   const [output, setOutput] = useState(null);
 
   const generateContext = (code) => {
@@ -260,8 +261,17 @@ function App() {
   };
 
   const runCode = async (code) => {
+    setIsRunningCode(true);
     const pyodide = await window.loadPyodide();
-    return await pyodide.runPythonAsync(code);
+    await pyodide.runPython(`
+      import sys
+      import io
+      sys.stdout = io.StringIO()
+  `);
+    await pyodide.runPython(code);
+    const stdout = pyodide.runPython("sys.stdout.getvalue()");
+    setOutput(stdout);
+    setIsRunningCode(false);
   };
   const getHelp = async () => {
     const hint = await generateHint(currentCode);
@@ -290,10 +300,13 @@ function App() {
           fluid
           search
           selection
-          value="{selectedProblem}"
+          value={selectedProblem}
           onChange={(e, data) => {
             setSelectedProblem(data.value);
-            setCurrentStarter(problems[problems.findIndex(({value}) => value == data.value)].starter_code)            
+            setCurrentStarter(
+              problems[problems.findIndex(({ value }) => value == data.value)]
+                .starter_code
+            );
           }}
           options={problems}
         />
@@ -313,32 +326,41 @@ function App() {
           editorProps={{ $blockScrolling: true }}
           style={{
             "border-radius": "8px",
-            height: "69%",
+            height: "50.5%",
           }}
         />
         <div className="flex flex-row gap-3">
-          {/* <button
+          <button
             onClick={async () => {
-              const out = await runCode(currentCode);
-              setOutput(out);
+              await runCode(currentCode);
             }}
-            className="rounded-md w-full bg-red-500 text-white p-2 font-bold text-center self-end hover:bg-red-600"
+            disabled={isRunningCode}
+            className="h-11	text-lg flex rounded-md w-full bg-red-500 text-white p-2 font-bold text-center justify-center content-center self-end hover:bg-red-600"
           >
-            Run Code
-          </button> */}
+            {isRunningCode ? (
+              <ReactLoading
+                type={"spin"}
+                color={"white"}
+                height={"10%"}
+                width={"10%"}
+              />
+            ) : (
+              <>Run Code</>
+            )}
+          </button>
           <button
             onClick={() => {
               getHelp();
             }}
-            className="text-lg flex rounded-md w-full bg-blue-500 text-white p-2 font-bold text-center justify-center content-center self-end hover:bg-blue-600"
+            className="h-11	text-lg flex rounded-md w-full bg-blue-500 text-white p-2 font-bold text-center justify-center content-center self-end hover:bg-blue-600"
             disabled={isGettingHelp}
           >
             {isGettingHelp ? (
               <ReactLoading
                 type={"spin"}
                 color={"white"}
-                height={"5%"}
-                width={"5%"}
+                height={"10%"}
+                width={"10%"}
               />
             ) : (
               <>Get Help!</>
@@ -346,14 +368,16 @@ function App() {
           </button>
         </div>
 
-        {/* <div
-          className="rounded-lg bg-black text-white p-4"
+        <div
+          className="rounded-lg bg-black text-white p-4 overflow-auto"
           style={{
             height: "17.5%",
           }}
         >
-          {output}
-        </div> */}
+          {output?.split("\n").map((line) => {
+            return <div>{line}</div>;
+          })}
+        </div>
       </div>
       <div
         className="w-80 bg-white rounded-lg p-4 flex flex-col gap-4"
