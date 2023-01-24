@@ -225,14 +225,11 @@ const evals = ["No", "Not really", "Kinda", "Yes"];
 const test = `def fancy_at(s):
                   pass`;
 function App() {
-  const [currentCode, setCurrentCode] = useState(null);
+  const [currentCode, setCurrentCode] = useState(problems[0].starter_code);
   const [gptResponses, setGptResponses] = useState([]);
   const [isGettingHelp, setIsGettingHelp] = useState(false);
   const [isRunningCode, setIsRunningCode] = useState(false);
   const [selectedProblem, setSelectedProblem] = useState(problems[0].value);
-  const [currentStarter, setCurrentStarter] = useState(
-    problems[0].starter_code
-  );
   const [output, setOutput] = useState(null);
 
   const generateContext = (code) => {
@@ -268,9 +265,14 @@ function App() {
       import io
       sys.stdout = io.StringIO()
   `);
-    await pyodide.runPython(code);
-    const stdout = pyodide.runPython("sys.stdout.getvalue()");
-    setOutput(stdout);
+    try {
+      await pyodide.runPython(code);
+
+      const stdout = pyodide.runPython("sys.stdout.getvalue()");
+      setOutput(stdout);
+    } catch (e) {
+      setOutput(e.message);
+    }
     setIsRunningCode(false);
   };
   const getHelp = async () => {
@@ -303,7 +305,7 @@ function App() {
           value={selectedProblem}
           onChange={(e, data) => {
             setSelectedProblem(data.value);
-            setCurrentStarter(
+            setCurrentCode(
               problems[problems.findIndex(({ value }) => value == data.value)]
                 .starter_code
             );
@@ -322,7 +324,7 @@ function App() {
           theme="monokai"
           onChange={onChange}
           name="editor"
-          value={currentStarter}
+          value={currentCode}
           editorProps={{ $blockScrolling: true }}
           style={{
             "border-radius": "8px",
@@ -332,18 +334,24 @@ function App() {
         <div className="flex flex-row gap-3">
           <button
             onClick={async () => {
-              await runCode(currentCode);
+              if (!isRunningCode) {
+                await runCode(currentCode);
+              } else {
+                setIsRunningCode(false);
+              }
             }}
-            disabled={isRunningCode}
             className="h-11	text-lg flex rounded-md w-full bg-red-500 text-white p-2 font-bold text-center justify-center content-center self-end hover:bg-red-600"
           >
             {isRunningCode ? (
-              <ReactLoading
-                type={"spin"}
-                color={"white"}
-                height={"10%"}
-                width={"10%"}
-              />
+              <>
+                <ReactLoading
+                  type={"spin"}
+                  color={"white"}
+                  height={"10%"}
+                  width={"10%"}
+                />
+                <span className="mx-2">Cancel</span>
+              </>
             ) : (
               <>Run Code</>
             )}
@@ -369,9 +377,9 @@ function App() {
         </div>
 
         <div
-          className="rounded-lg bg-black text-white p-4 overflow-auto"
+          className="rounded-lg bg-black text-white p-4 overflow-auto w-full"
           style={{
-            height: "17.5%",
+            height: "16.5%",
           }}
         >
           {output?.split("\n").map((line) => {
