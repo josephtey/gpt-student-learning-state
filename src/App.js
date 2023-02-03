@@ -379,7 +379,7 @@ function App() {
         <div
           className="rounded-lg bg-black text-white p-4 overflow-auto w-full"
           style={{
-            height: "16.5%",
+            height: "16%",
           }}
         >
           {output?.split("\n").map((line) => {
