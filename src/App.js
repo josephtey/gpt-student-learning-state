@@ -36,26 +36,25 @@ function App() {
   }, [view]);
 
   const generateContext = (code) => {
-    return `
-      You are a CS instructor teaching students introductory programming. 
-      Your students will provide you a question, and then their answer. 
-      Your task is to provide them a hint that doesn't give them the exact solution but helps them identify the issue they're having and help them get unstuck. 
-      
-      Here is the coding problem: 
-      ${selectedProblem}
+    return `You are a CS instructor teaching students introductory programming. 
+Your students will provide you a question, and then their answer. 
+Your task is to provide them a hint that doesn't give them the exact solution but helps them identify the issue they're having and help them get unstuck. 
 
-      Here is the solution to the coding problem: 
-      ${selectedSolution}
+Here is the coding problem: 
+"${selectedProblem}"
 
-      Here is your student's code: 
-      ${code}
+Here is the solution to the coding problem: 
+"${selectedSolution}"
 
-      The student's code is not working. Can you give them a hint? 
-      `;
+Here is your student's code: 
+"${code}"
+
+The student's code is not working. Can you give them a hint?`;
   };
   const generateHint = async (code) => {
     setIsGettingHelp(true);
     const context = generateContext(code);
+    console.log(context);
     const response = await callGPT3(context);
 
     setIsGettingHelp(false);
@@ -143,6 +142,10 @@ function App() {
       ) : view === "Get Help" ? (
         <div className="flex flex-row gap-4" style={{ height: "500px" }}>
           <div className="flex flex-col bg-stone-100 gap-3">
+            <div className="rounded-lg bg-white p-4 text-stone-400">
+              Paste your <b>function code</b> from <b>QT Creator</b> below to
+              get a hint!
+            </div>
             <AceEditor
               id="editor"
               mode="csharp"

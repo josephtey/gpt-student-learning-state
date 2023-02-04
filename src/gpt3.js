@@ -28,7 +28,7 @@ export async function callGPT3(myPrompt) {
   const response = await openai.createCompletion({
     model: "text-davinci-003",
     prompt: myPrompt,
-    temperature: 0.7,
+    temperature: 0.3,
     max_tokens: 256,
     top_p: 1,
     frequency_penalty: 0,
