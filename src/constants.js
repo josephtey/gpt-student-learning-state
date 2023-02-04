@@ -351,4 +351,75 @@ export const cs106b = [
         }
     }`,
   },
+  {
+    text: "Eating a Chocolate Bar (Hard)",
+    starter_code: "int numWaysToEat(int numSquares)",
+    value: `You have a chocolate bar that's subdivided into a row of n squares. You want to eat the candy bar from left to right. To do so, you'll break off a piece, eat it, then break off another, eat that one, etc. This question is all about using recursion to see different ways of doing this and what that looks like from a C++ perspective.
+
+    To start things off, let's begin by enforcing a rule. You'll eat the chocolate bar from left to right, and at each point you can either break off a single square or two squares. For example, suppose you have a chocolate bar with five pieces. You could break off a piece of size two, then a piece of size one, and then eat the remaining two squares. Or you could eat one square, then two squares, then one square, and then one more square. There are eight total ways you could eat this chocolate bar, which I'll denote by listing out the sizes of the squares you'll eat:
+    
+    - 1, 1, 1, 1, 1
+    - 1, 1, 1, 2
+    - 1, 1, 2, 1
+    - 1, 2, 1, 1
+    - 1, 2, 2
+    - 2, 1, 1, 1
+    - 2, 1, 2
+    - 2, 2, 1
+    
+    Notice that order matters here. As a first step, let's write some code to count how many ways you can eat a chocolate bar according to these rules.
+    
+    Write a function "int numWaysToEat(int numSquares)" that returns the number of ways to eat a chocolate bar consisting of a row of numSquares squares, subject to the restriction that you can only eat one or two squares at a time. If the number of squares is negative, call error to report an error. (You can eat a chocolate bar with no squares, and there's only one way to do it, which is to not eat anything at all.)`,
+    styledValue: (
+      <>
+        <p>
+          You have a chocolate bar that's subdivided into a row of n squares.
+          You want to eat the candy bar from left to right. To do so, you'll
+          break off a piece, eat it, then break off another, eat that one, etc.
+          This question is all about using recursion to see different ways of
+          doing this and what that looks like from a C++ perspective.
+        </p>
+
+        <p>
+          To start things off, let's begin by enforcing a rule. You'll eat the
+          chocolate bar from left to right, and at each point you can either
+          break off a single square or two squares. For example, suppose you
+          have a chocolate bar with five pieces. You could break off a piece of
+          size two, then a piece of size one, and then eat the remaining two
+          squares. Or you could eat one square, then two squares, then one
+          square, and then one more square. There are eight total ways you could
+          eat this chocolate bar, which I'll denote by listing out the sizes of
+          the squares you'll eat:
+        </p>
+
+        <ul>
+          <li>1, 1, 1, 1, 1</li>
+          <li>1, 1, 1, 2</li>
+          <li>1, 1, 2, 1</li>
+          <li>1, 2, 1, 1</li>
+          <li>1, 2, 2</li>
+          <li>2, 1, 1, 1</li>
+          <li>2, 1, 2</li>
+          <li>2, 2, 1</li>
+        </ul>
+        <br />
+        <p>
+          Notice that order matters here. As a first step, let's write some code
+          to count how many ways you can eat a chocolate bar according to these
+          rules.
+        </p>
+
+        <p>
+          Write a function{" "}
+          <b className="text-red-500">int numWaysToEat(int numSquares)</b> that
+          returns the number of ways to eat a chocolate bar consisting of a row
+          of <b>numSquares</b> squares, subject to the restriction that you can
+          only eat one or two squares at a time. If the number of squares is
+          negative, call <b>error</b> to report an error. (You <b>can</b> eat a
+          chocolate bar with no squares, and there's only one way to do it,
+          which is to not eat anything at all.
+        </p>
+      </>
+    ),
+  },
 ];

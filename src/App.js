@@ -1,5 +1,5 @@
 import "semantic-ui-css/semantic.min.css";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { callGPT3 } from "./gpt3";
 import AceEditor from "react-ace";
@@ -30,6 +30,10 @@ function App() {
   );
 
   const [output, setOutput] = useState(null);
+
+  useEffect(() => {
+    setGptResponses([]);
+  }, [view]);
 
   const generateContext = (code) => {
     return `
@@ -94,12 +98,12 @@ function App() {
   };
 
   return (
-    <div className="flex flex-row h-screen pt-32 gap-4 justify-center bg-stone-100">
+    <div
+      className="flex h-screen gap-4 justify-center bg-stone-100"
+      style={{ alignItems: "center" }}
+    >
       {view === "Problem" ? (
-        <div
-          className="bg-white rounded-lg p-4 w-1/2 flex flex-col justify-between	"
-          style={{ height: "75%" }}
-        >
+        <div className="bg-white rounded-lg p-4 w-1/2 flex flex-col justify-between">
           <div>
             <Dropdown
               placeholder="Select Problem"
@@ -120,7 +124,10 @@ function App() {
               options={problems}
             />
 
-            <div className="mt-5">
+            <div
+              className="my-5 overflow-auto overflow-x-hidden"
+              style={{ height: "400px" }}
+            >
               <p>{selectedStyledProblem}</p>
             </div>
           </div>
@@ -134,7 +141,7 @@ function App() {
           </button>
         </div>
       ) : view === "Get Help" ? (
-        <>
+        <div className="flex flex-row gap-4" style={{ height: "500px" }}>
           <div className="flex flex-col bg-stone-100 gap-3">
             <AceEditor
               id="editor"
@@ -146,7 +153,6 @@ function App() {
               editorProps={{ $blockScrolling: true }}
               style={{
                 "border-radius": "8px",
-                height: "67.5%",
               }}
             />
             <div className="flex flex-row gap-3">
@@ -214,12 +220,9 @@ function App() {
           })}
         </div> */}
           </div>
-          <div
-            className="bg-white rounded-lg p-4 flex flex-col gap-4 w-80"
-            style={{ height: "75%" }}
-          >
+          <div className="bg-white rounded-lg p-4 flex flex-col gap-4 w-80">
             {gptResponses.length > 0 ? (
-              <div style={{ height: "50px" }}>
+              <div>
                 <b className="text-lg">Was this hint helpful?</b>
                 <div className="flex flex-row justify-between text-stone-600 mt-2">
                   {evals.map((val, i) => {
@@ -257,7 +260,7 @@ function App() {
               })}
             </div>
           </div>
-        </>
+        </div>
       ) : null}
     </div>
   );
