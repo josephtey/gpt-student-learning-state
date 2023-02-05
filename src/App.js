@@ -142,7 +142,7 @@ The student's code is not working. Can you give them a hint?`;
       ) : view === "Get Help" ? (
         <div className="flex flex-row gap-4" style={{ height: "500px" }}>
           <div className="flex flex-col bg-stone-100 gap-3">
-            <div className="rounded-lg bg-white p-4 text-stone-400">
+            <div className="rounded-lg bg-white p-4 text-stone-700">
               Paste your <b>function code</b> from <b>QT Creator</b> below to
               get a hint!
             </div>
