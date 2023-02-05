@@ -409,5 +409,16 @@ bool areComplementaryStrands(string one, string two) {
         </p>
       </>
     ),
+    solution: `int numWaysToEat(int numSquares) {
+      if (numSquares < 0) {
+          error("Negative chocolate? YOU MONSTER!");
+      }
+
+      if (numSquares <= 1) {
+        return 1;
+      } else {
+        return numWaysToEat(numSquares - 1) + numWaysToEat(numSquares - 2);
+      }
+    }`,
   },
 ];
