@@ -211,8 +211,54 @@ export const cs106a = [
 
 export const cs106b = [
   {
+    text: "Ddeeddoouubblliinngg (Easy)",
+    starter_files_url:
+      "https://web.stanford.edu/class/cs106b/practice-problems/problems/15/Starter%20Files.zip",
+    starter_code: `string dedouble(const string& str)`,
+    styledValue: (
+      <>
+        <p>
+          In the early part of the 20th century, there was considerable interest
+          in both England and the United States in simplifying the rules used
+          for spelling English words, which has always been a difficult
+          proposition. One suggestion advanced as part of this movement was the
+          removal of all doubled letters from words. If this were done, no one
+          would have to remember that the name of the Stanford student union is
+          spelled “Tresidder,” even though the incorrect spelling “Tressider”
+          occurs at least as often. If doubled letters were banned, everyone
+          could agree on “Tresider.”
+        </p>
+
+        <p>
+          Write a recursive function{" "}
+          <b className="text-red-500">string dedouble(const string& str)</b>{" "}
+          that takes a string as its argument and returns a new string with any
+          consecutive substring consisting of repeated copies of the same letter
+          replaced by a single copy letter of that letter. Your function should
+          not try to consider the case of the letters. For example, calling the
+          function on the name "Lloyd" should return the argument unchanged
+          because 'L' and 'l' are different letters. Your function must be
+          purely recursive and may not make use of any iterative constructs such
+          as for or while.
+        </p>
+      </>
+    ),
+    value: `In the early part of the 20th century, there was considerable interest in both England and the United States in simplifying the rules used for spelling English words, which has always been a difficult proposition. One suggestion advanced as part of this movement was the removal of all doubled letters from words. If this were done, no one would have to remember that the name of the Stanford student union is spelled “Tresidder,” even though the incorrect spelling “Tressider” occurs at least as often. If doubled letters were banned, everyone could agree on “Tresider.” Write a recursive function 'string dedouble(const string& str)' that takes a string as its argument and returns a new string with any consecutive substring consisting of repeated copies of the same letter replaced by a single copy letter of that letter. Your function should not try to consider the case of the letters. For example, calling the function on the name "Lloyd" should return the argument unchanged because 'L' and 'l' are different letters. Your function must be purely recursive and may not make use of any iterative constructs such as for or while.`,
+    solution: `string dedouble(const string& str) {
+      if (str.length() <= 1) {
+          return str;
+      } else if (str[0] == str[1]) {
+        return dedouble(str.substr(1));
+      } else {
+        return str[0] + dedouble(str.substr(1));
+      }
+    }`,
+  },
+  {
     text: "Checking Complementary Strands (Medium)",
-    starter_code: `bool areComplementaryStrands(string one, string two) {\n}`,
+    starter_files_url:
+      "https://web.stanford.edu/class/cs106b/practice-problems/problems/14/Starter%20Files.zip",
+    starter_code: `bool areComplementaryStrands(string one, string two)`,
     value: `DNA strands are made up of smaller units called nucleotides. There are four different nucleotides present in DNA, which are represented by the letters A, C, G, and T. Any DNA strand, therefore, can be thought of as string consisting of the nucleotides that make up that strand, in order. In DNA, each strand is paired with a complementary strand of the same length. The nucleotides in a complementary strand pair off as follows: A pairs with T, and C pairs with G.`,
     styledValue: (
       <>
@@ -259,50 +305,10 @@ bool areComplementaryStrands(string one, string two) {
 }`,
   },
   {
-    text: "Ddeeddoouubblliinngg (Easy)",
-    starter_code: `string dedouble(const string& str)`,
-    styledValue: (
-      <>
-        <p>
-          In the early part of the 20th century, there was considerable interest
-          in both England and the United States in simplifying the rules used
-          for spelling English words, which has always been a difficult
-          proposition. One suggestion advanced as part of this movement was the
-          removal of all doubled letters from words. If this were done, no one
-          would have to remember that the name of the Stanford student union is
-          spelled “Tresidder,” even though the incorrect spelling “Tressider”
-          occurs at least as often. If doubled letters were banned, everyone
-          could agree on “Tresider.”
-        </p>
-
-        <p>
-          Write a recursive function{" "}
-          <b className="text-red-500">string dedouble(const string& str)</b>{" "}
-          that takes a string as its argument and returns a new string with any
-          consecutive substring consisting of repeated copies of the same letter
-          replaced by a single copy letter of that letter. Your function should
-          not try to consider the case of the letters. For example, calling the
-          function on the name "Lloyd" should return the argument unchanged
-          because 'L' and 'l' are different letters. Your function must be
-          purely recursive and may not make use of any iterative constructs such
-          as for or while.
-        </p>
-      </>
-    ),
-    value: `In the early part of the 20th century, there was considerable interest in both England and the United States in simplifying the rules used for spelling English words, which has always been a difficult proposition. One suggestion advanced as part of this movement was the removal of all doubled letters from words. If this were done, no one would have to remember that the name of the Stanford student union is spelled “Tresidder,” even though the incorrect spelling “Tressider” occurs at least as often. If doubled letters were banned, everyone could agree on “Tresider.” Write a recursive function 'string dedouble(const string& str)' that takes a string as its argument and returns a new string with any consecutive substring consisting of repeated copies of the same letter replaced by a single copy letter of that letter. Your function should not try to consider the case of the letters. For example, calling the function on the name "Lloyd" should return the argument unchanged because 'L' and 'l' are different letters. Your function must be purely recursive and may not make use of any iterative constructs such as for or while.`,
-    solution: `string dedouble(const string& str) {
-      if (str.length() <= 1) {
-          return str;
-      } else if (str[0] == str[1]) {
-        return dedouble(str.substr(1));
-      } else {
-        return str[0] + dedouble(str.substr(1));
-      }
-    }`,
-  },
-  {
     text: "Even words (Easy)",
-    starter_code: `bool isEvenWord(const string& word){}`,
+    starter_files_url:
+      "https://web.stanford.edu/class/cs106b/practice-problems/problems/16/Starter%20Files.zip",
+    starter_code: `bool isEvenWord(const string& word)`,
     styledValue: (
       <>
         <p>
@@ -341,6 +347,8 @@ bool areComplementaryStrands(string one, string two) {
   },
   {
     text: "Eating a Chocolate Bar (Hard)",
+    starter_files_url:
+      "https://web.stanford.edu/class/cs106b/practice-problems/problems/52/Starter%20Files.zip",
     starter_code: "int numWaysToEat(int numSquares)",
     value: `You have a chocolate bar that's subdivided into a row of n squares. You want to eat the candy bar from left to right. To do so, you'll break off a piece, eat it, then break off another, eat that one, etc. This question is all about using recursion to see different ways of doing this and what that looks like from a C++ perspective.
 

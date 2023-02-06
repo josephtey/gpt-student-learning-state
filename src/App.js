@@ -22,6 +22,9 @@ function App() {
   const [isGettingHelp, setIsGettingHelp] = useState(false);
   const [isRunningCode, setIsRunningCode] = useState(false);
   const [selectedProblem, setSelectedProblem] = useState(problems[0].value);
+  const [selectedStarterFiles, setSelectedStarterFiles] = useState(
+    problems[0].starter_files_url
+  );
   const [selectedStyledProblem, setSelectedStyledProblem] = useState(
     problems[0].styledValue
   );
@@ -113,9 +116,11 @@ The student's code is not working. Can you give them a hint?`;
               onChange={(e, data) => {
                 const prob =
                   problems[
-                    problems.findIndex(({ value }) => value == data.value)
+                    problems.findIndex(({ value }) => value === data.value)
                   ];
+
                 setSelectedProblem(data.value);
+                setSelectedStarterFiles(prob.starter_files_url);
                 setSelectedStyledProblem(prob.styledValue);
                 setSelectedSolution(prob.solution);
                 setCurrentCode(prob.starter_code);
@@ -127,6 +132,13 @@ The student's code is not working. Can you give them a hint?`;
               className="my-5 overflow-auto overflow-x-hidden"
               style={{ height: "400px" }}
             >
+              {selectedStarterFiles ? (
+                <div className="mb-4">
+                  <a href={selectedStarterFiles} className="hover:underline">
+                    Download Starter Files
+                  </a>
+                </div>
+              ) : null}
               <p>{selectedStyledProblem}</p>
             </div>
           </div>
