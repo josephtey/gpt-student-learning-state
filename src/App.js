@@ -7,12 +7,12 @@ import { addHint, updateEvaluation } from "./utils";
 import Swal from "sweetalert2";
 import ReactLoading from "react-loading";
 import { Dropdown } from "semantic-ui-react";
-import { cs106a, cs106b } from "./constants";
+import { cs106a, cs106b, cs106b_assignment } from "./constants";
 
 import "ace-builds/src-noconflict/mode-csharp";
 import "ace-builds/src-noconflict/theme-monokai";
 
-const problems = cs106b;
+const problems = cs106b_assignment;
 
 const evals = ["No", "Not really", "Kinda", "Yes"];
 function App() {
@@ -45,9 +45,6 @@ Your task is to provide them a hint that doesn't give them the exact solution bu
 
 Here is the coding problem: 
 "${selectedProblem}"
-
-Here is the solution to the coding problem: 
-"${selectedSolution}"
 
 Here is your student's code: 
 "${code}"
