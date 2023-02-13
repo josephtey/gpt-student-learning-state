@@ -1,1 +1,1 @@
-https://gpt-student-learning-state.vercel.app/
+https://sherpa-ai.vercel.app/
