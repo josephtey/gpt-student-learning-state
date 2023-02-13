@@ -1,5 +1,5 @@
 import "semantic-ui-css/semantic.min.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./App.css";
 import { callGPT3 } from "./gpt3";
 import AceEditor from "react-ace";
@@ -108,53 +108,62 @@ function App() {
 
   return (
     <div
-      className="flex h-screen gap-4 justify-center bg-stone-100"
+      className="flex flex-col h-screen gap-4 justify-center bg-stone-100"
       style={{ alignItems: "center" }}
     >
       {view === "Problem" ? (
-        <div className="bg-white rounded-lg p-4 w-1/2 flex flex-col justify-between">
-          <div>
-            <Dropdown
-              placeholder="Select Problem"
-              fluid
-              search
-              selection
-              value={selectedProblem}
-              onChange={(e, data) => {
-                const prob =
-                  problems[
-                    problems.findIndex(({ value }) => value === data.value)
-                  ];
-
-                setSelectedProblem(data.value);
-                setSelectedStarterFiles(prob.starter_files_url);
-                setSelectedStyledProblem(prob.styledValue);
-                setSelectedSolution(prob.solution);
-                setCurrentCode(prob.starter_code);
-              }}
-              options={problems}
-            />
-
-            <div className="my-5 overflow-auto overflow-x-hidden">
-              {selectedStarterFiles ? (
-                <div className="mb-4">
-                  <a href={selectedStarterFiles} className="hover:underline">
-                    Download Starter Files
-                  </a>
-                </div>
-              ) : null}
-              <p>{selectedStyledProblem}</p>
-            </div>
+        <>
+          <div className="pb-8">
+            <span className="text-5xl font-bold pr-4" style={{ opacity: 0.8 }}>
+              Sherpa
+            </span>{" "}
+            {""}
+            <span className="text-6xl">🏔</span>
           </div>
-          <button
-            onClick={() => {
-              setView("Get Help");
-            }}
-            className="text-lg flex rounded-md w-full bg-red-500 text-white p-2 font-bold text-center justify-center content-center hover:bg-red-600"
-          >
-            I need help!
-          </button>
-        </div>
+          <div className="bg-white rounded-lg p-4 w-1/2 flex flex-col justify-between">
+            <div>
+              <Dropdown
+                placeholder="Select Problem"
+                fluid
+                search
+                selection
+                value={selectedProblem}
+                onChange={(e, data) => {
+                  const prob =
+                    problems[
+                      problems.findIndex(({ value }) => value === data.value)
+                    ];
+
+                  setSelectedProblem(data.value);
+                  setSelectedStarterFiles(prob.starter_files_url);
+                  setSelectedStyledProblem(prob.styledValue);
+                  setSelectedSolution(prob.solution);
+                  setCurrentCode(prob.starter_code);
+                }}
+                options={problems}
+              />
+
+              <div className="my-5 overflow-auto overflow-x-hidden">
+                {selectedStarterFiles ? (
+                  <div className="mb-4">
+                    <a href={selectedStarterFiles} className="hover:underline">
+                      Download Starter Files
+                    </a>
+                  </div>
+                ) : null}
+                <p>{selectedStyledProblem}</p>
+              </div>
+            </div>
+            <button
+              onClick={() => {
+                setView("Get Help");
+              }}
+              className="text-lg flex rounded-md w-full bg-red-500 text-white p-2 font-bold text-center justify-center content-center hover:bg-red-600"
+            >
+              I need help!
+            </button>
+          </div>
+        </>
       ) : view === "Get Help" ? (
         <div className="flex flex-row gap-4" style={{ height: "500px" }}>
           <div className="flex flex-col bg-stone-100 gap-3">
