@@ -433,77 +433,75 @@ bool areComplementaryStrands(string one, string two) {
 
 export const cs106b_assignment = [
   {
-    text: "Combine (specific task info)",
+    text: "Assignment 5, Part Four: Combine",
     starter_files_url:
       "https://web.stanford.edu/class/archive/cs/cs106b/cs106b.1224/assignments/a5/Assignment%205.zip",
     starter_code:
       "Vector<DataPoint> combine(const Vector<Vector<DataPoint>>& dataPoints)",
-    value: `Your task is to implement a function
+    value: `Suppose you have several lists of numbers, each of which is already in sorted order. You want to combine those lists together into one giant list, also in sorted order. How should you do this? 
 
-    Vector<DataPoint> combine(const Vector<Vector<DataPoint>>& dataPoints)
-    
-    that takes as input a list containing zero or more lists of data points, then uses the above algorithm to combine them into one giant sorted sequence. The DataPoint type is a defined as follows:
-    
-    struct DataPoint {
-      string name;   
-      double weight; 
-    };
-    
-    You can assume that the sequences of data points provided to you are sorted by their weight fields from lowest to highest, and your resulting sequence should also be sorted by weight from lowest to highest. 
-    
-    Implement the combine function from Combine.cpp using the following recursive strategy:
-    
-    - Split the list of sequences into two groups with roughly the same number of sequences.
-    - Recursively combine each of those groups together, forming two sorted sequences.
-    - Use the merge algorithm to merge those resulting sequences into one overall sequence.`,
-    styledValue: <></>,
-    solution: ``,
-  },
-  {
-    text: "Combine (everything)",
-    starter_files_url:
-      "https://web.stanford.edu/class/archive/cs/cs106b/cs106b.1224/assignments/a5/Assignment%205.zip",
-    starter_code:
-      "Vector<DataPoint> combine(const Vector<Vector<DataPoint>>& dataPoints)",
-    value: `Suppose you have several lists of numbers, each of which is already in sorted order. You want to combine those lists together into one giant list, also in sorted order. How should you do this?
+One approach would be to ignore the fact that we know these lists are already sorted and to do the following: create a giant Vector holding all the numbers, then sort it with mergesort in time O(n log n). This works, but by harnessing the fact that the input sequences are already sorted we can improve on this.
 
-    One approach would be to ignore the fact that we know these lists are already sorted and to do the following: create a giant Vector holding all the numbers, then sort it with mergesort in time O(n log n). This works, but by harnessing the fact that the input sequences are already sorted we can improve on this.
-    
-    If you’ll recall, mergesort works by recursively breaking the input array down into a bunch of tiny sequences, then using the merge algorithm to combine all those sequences back together into one giant, sorted sequence. Here, we already have the input broken down into smaller sorted sequences, and so we just need to do that second step of mergesort, merging things back together, to finish things off.
-    
-    Let’s imagine that we have k sequences that collectively have n total elements in them. We can follow the lead of mergesort to sort those sequences together using an algorithm called combine:
-    - Split those k sequences apart into two groups of roughly k / 2 sequences each. (It doesn’t matter how many elements are in each of the sequences, just that the number of sequences in each group is roughly the same).
-    - Recursively combine each of those groups of sequences. You now have two sorted sequences, one made by combining the sequences in the first group, and one made by combining the sequences from the second group.
-    - Using the merge algorithm from class, merge those two large sequences together into one final overall sequence.
-    
-    With a little bit of creativity you can prove that the runtime for this approach is O(n log k). In the case where you have a small number of sequences (low k) with a large total number of elements (large n), this can be dramatically faster than resorting things from scratch! For example, if n is roughly one million and k is, say, ten, then this combine algorithm will be roughly ten times faster than a regular mergesort.
-    
-    Your task is to implement a function
-    
-    Vector<DataPoint> combine(const Vector<Vector<DataPoint>>& dataPoints)
-    
-    that takes as input a list containing zero or more lists of data points, then uses the above algorithm to combine them into one giant sorted sequence. The DataPoint type is a defined as follows:
-    
-    struct DataPoint {
-      string name;   
-      double weight; 
-    };
-    
-    You can assume that the sequences of data points provided to you are sorted by their weight fields from lowest to highest, and your resulting sequence should also be sorted by weight from lowest to highest. 
-    
-    Implement combine from Combine.cpp using the following recursive strategy:
-    
-    - Split the list of sequences into two groups with roughly the same number of sequences.
-    - Recursively combine each of those groups together, forming two sorted sequences.
-    - Use the merge algorithm to merge those resulting sequences into one overall sequence.
-    
-    Some notes on this problem:
-    - A key step in solving this problem will be implementing the merge algorithm. The version of merge that we outlined in class worked by repeatedly removing the first elements of the sequences to merge. Be careful – as you saw in Problem One, removing from the front of a Vector does not take time O(1), and if you remove too many elements from the front of a Vector, you may end up exceeding the O(n log k) runtime.
-    - There may be multiple DataPoints that have the same weight. If that’s the case, you should keep each of them in the resulting sequence, and you can break ties in weights arbitrarily.
-    - The sequences to combine aren’t required to have the same size. Some of them may be gigantic. Some of them might be empty.
-    - It’s legal to combine a list of zero sequences. What do you think you should return in this case?
-    - The C++ standard libraries contain a function std::merge that implements the merge algorithm from class. For the purposes of this assignment, please refrain from using that function. We’re specifically interested in seeing you code this one up yourself.`,
-    styledValue: <></>,
-    solution: ``,
+If you’ll recall, mergesort works by recursively breaking the input array down into a bunch of tiny sequences, then using the merge algorithm to combine all those sequences back together into one giant, sorted sequence. Here, we already have the input broken down into smaller sorted sequences, and so we just need to do that second step of mergesort, merging things back together, to finish things off.
+
+Let’s imagine that we have k sequences that collectively have n total elements in them. We can follow the lead of mergesort to sort those sequences together using an algorithm called combine:
+- Split those k sequences apart into two groups of roughly k / 2 sequences each. (It doesn’t matter how many elements are in each of the sequences, just that the number of sequences in each group is roughly the same).
+- Recursively combine each of those groups of sequences. You now have two sorted sequences, one made by combining the sequences in the first group, and one made by combining the sequences from the second group.
+- Using the merge algorithm from class, merge those two large sequences together into one final overall sequence.
+
+With a little bit of creativity you can prove that the runtime for this approach is O(n log k). In the case where you have a small number of sequences (low k) with a large total number of elements (large n), this can be dramatically faster than resorting things from scratch! For example, if n is roughly one million and k is, say, ten, then this combine algorithm will be roughly ten times faster than a regular mergesort.
+
+Your task is to implement a function
+
+Vector<DataPoint> combine(const Vector<Vector<DataPoint>>& dataPoints)
+
+that takes as input a list containing zero or more lists of data points, then uses the above algorithm to combine them into one giant sorted sequence. The DataPoint type is a defined as follows:
+
+struct DataPoint {
+  string name;   
+  double weight; 
+};
+
+You can assume that the sequences of data points provided to you are sorted by their weight fields from lowest to highest, and your resulting sequence should also be sorted by weight from lowest to highest. 
+
+Implement combine from Combine.cpp using the following recursive strategy:
+
+- Split the list of sequences into two groups with roughly the same number of sequences.
+- Recursively combine each of those groups together, forming two sorted sequences.
+- Use the merge algorithm to merge those resulting sequences into one overall sequence.
+
+Some notes on this problem:
+- A key step in solving this problem will be implementing the merge algorithm. The version of merge that we outlined in class worked by repeatedly removing the first elements of the sequences to merge. Be careful – as you saw in Problem One, removing from the front of a Vector does not take time O(1), and if you remove too many elements from the front of a Vector, you may end up exceeding the O(n log k) runtime.
+- There may be multiple DataPoints that have the same weight. If that’s the case, you should keep each of them in the resulting sequence, and you can break ties in weights arbitrarily.
+- The sequences to combine aren’t required to have the same size. Some of them may be gigantic. Some of them might be empty.
+- It’s legal to combine a list of zero sequences. What do you think you should return in this case?
+- The C++ standard libraries contain a function std::merge that implements the merge algorithm from class. For the purposes of this assignment, please refrain from using that function. We’re specifically interested in seeing you code this one up yourself.`,
+    styledValue: (
+      <>
+        <p>
+          This is an{" "}
+          <span className="underline decoration-pink-500 font-bold decoration-2">
+            experimental tool
+          </span>
+          . We are acutely aware of the dangers of misinformation with GPT-3 and
+          want to be transparent about the accuracy of each hint. Stanford has
+          multiple established, accurate, and helpful resources for each
+          assignment you work on:{" "}
+          <span className="underline decoration-pink-500 font-bold decoration-2">
+            Office Hours, Lecture, LaIR
+          </span>
+          .
+        </p>
+        <p>
+          However, working on an assignment is an intense sprint, and we believe
+          that any form of help — from words of encouragement to guiding
+          questions — is a{" "}
+          <span className="underline decoration-sky-500 font-bold decoration-2">
+            step in the right direction.
+          </span>
+        </p>
+        <p>Made with ❤️ at 🌲</p>
+      </>
+    ),
   },
 ];

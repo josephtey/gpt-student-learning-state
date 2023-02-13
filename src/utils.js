@@ -21,10 +21,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export const addHint = async (code, GPTResponse, prompt) => {
+export const addHint = async (query, code, GPTResponse, prompt) => {
   const dbRef = collection(db, "individual_learning_state");
 
   const inp_data = {
+    query,
     code: code,
     GPTResponse: GPTResponse,
     prompt: prompt,
@@ -38,6 +39,15 @@ export const updateEvaluation = async (id, score) => {
   const docRef = doc(db, "individual_learning_state", id);
   const response = await updateDoc(docRef, {
     evaluation: score,
+  });
+
+  return response;
+};
+
+export const updateEvaluationText = async (id, text) => {
+  const docRef = doc(db, "individual_learning_state", id);
+  const response = await updateDoc(docRef, {
+    evaluation_text: text,
   });
 
   return response;
